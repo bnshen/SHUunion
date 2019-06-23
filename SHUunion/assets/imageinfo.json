@@ -1,0 +1,39 @@
+[
+    {
+        "name":"xiaomi",
+        "id":"1",
+        "description":"Throughout the history of smartphones, Snapdragon™ has been there as an engine powering the world's devices. Now, the Snapdragon™ 855 presents another leap forward in performance. Made with 7nm process technology, it leads the pack, and we are proud to be the first to put it in your hands through Mi 9.",
+        "redeemed":false,
+        "available":false,
+        "year":2019,
+        "month":6,
+        "day":10,
+        "stepNeed":10000,
+        "stepNow":0
+        
+    },
+    {
+        "name":"huawei",
+        "id":"2",
+        "description":"Zoom in to explore the mystery of the celestial at night, watch an eagle hovering over trees or examine the delicate details of crystal. Capture the best things in the moment and create your vision for the future. The HUAWEI P30 Pro is accentuating a new peak of smartphone photography.",
+        "redeemed":false,
+        "available":false,
+        "year":2019,
+        "month":6,
+        "day":1,
+        "stepNeed":200000,
+        "stepNow":0
+    },
+    {
+        "name":"apple",
+        "id":"3",
+         "description":"Super Retina in two sizes — including the largest display ever on an iPhone. Even faster Face ID. The smartest, most powerful chip in a smartphone. And a breakthrough dual-camera system with Depth Control. iPhone XS is everything you love about iPhone. Taken to the extreme.",
+         "redeemed":false,
+         "available":false,
+         "year":2019,
+         "month":4,
+         "day":1,
+         "stepNeed":500000,
+         "stepNow":0
+    }
+]
