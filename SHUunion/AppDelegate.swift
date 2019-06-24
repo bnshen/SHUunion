@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         var userdata:UserData = UserData.shared
         userdata.steps.firstInit()
-        userdata.search()
+       // userdata.search()
         return true
     }
 

@@ -54,6 +54,9 @@ final class UserData: BindableObject {
     }
 
     func update() {
+        if self.giftsDatas.count == 0{
+            return
+        }
         self.getStepCounts_today(healthStore: self.steps.healthStore)
         (0...self.giftsDatas.count-1).forEach{
             item in
@@ -145,12 +148,13 @@ final class UserData: BindableObject {
     
     func search() {
 
-        var urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
      //   urlComponents.queryItems = [
      //       URLQueryItem(name: "q", value: name)
      //   ]
         
         var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         print("searching..")
         searchCancellable = URLSession.shared.send(request: request)
@@ -158,6 +162,37 @@ final class UserData: BindableObject {
             .map { $0.items }
             .replaceError(with: [])
             .assign(to: \.giftsDatas, on: self)
+    }
+    
+    var loginDatas = loginStuct(){
+        didSet {
+            didChange.send(self)
+        }
+    }
+   
+    func login(username:String,password:String) {
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/login")!
+        //   urlComponents.queryItems = [
+        //       URLQueryItem(name: "q", value: name)
+        //   ]
+        
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "POST"
+        
+        let postData = ["username":username,"password":password]
+        let postString = postData.compactMap({ (key, value) -> String in
+            return "\(key)=\(value)"
+        }).joined(separator: "&")
+        request.httpBody = postString.data(using: .utf8)
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        searchCancellable = URLSession.shared.send(request: request)
+            .decode(type:loginStuctReceive.self, decoder: JSONDecoder())
+            .map { $0 }
+            .replaceError(with:loginStuctReceive())
+            .assign(to: \.loginDatas.status , on: self)
     }
 
  

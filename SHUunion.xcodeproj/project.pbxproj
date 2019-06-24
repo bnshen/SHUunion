@@ -15,6 +15,9 @@
 		264765D422BC9BFE00D5454B /* rankList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264765D322BC9BFE00D5454B /* rankList.swift */; };
 		264765D622BCA1FB00D5454B /* rankPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264765D522BCA1FB00D5454B /* rankPage.swift */; };
 		26567F8122BB387900C767A4 /* imageinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 26567F8022BB387900C767A4 /* imageinfo.json */; };
+		267E735522C0801500AA3380 /* loginpage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E735422C0801500AA3380 /* loginpage.swift */; };
+		267E735722C0838D00AA3380 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 267E735622C0838D00AA3380 /* logo.png */; };
+		267E735A22C09A1800AA3380 /* loginStuct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E735922C09A1800AA3380 /* loginStuct.swift */; };
 		26E7863022BB3EAE00FBE73F /* gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E7862F22BB3EAE00FBE73F /* gifts.swift */; };
 		26E7863222BB40FE00FBE73F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E7863122BB40FE00FBE73F /* Data.swift */; };
 		26E7863622BB452800FBE73F /* huawei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 26E7863322BB452800FBE73F /* huawei.jpg */; };
@@ -73,6 +76,9 @@
 		264765D322BC9BFE00D5454B /* rankList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rankList.swift; sourceTree = "<group>"; };
 		264765D522BCA1FB00D5454B /* rankPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rankPage.swift; sourceTree = "<group>"; };
 		26567F8022BB387900C767A4 /* imageinfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = imageinfo.json; sourceTree = "<group>"; };
+		267E735422C0801500AA3380 /* loginpage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginpage.swift; sourceTree = "<group>"; };
+		267E735622C0838D00AA3380 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		267E735922C09A1800AA3380 /* loginStuct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginStuct.swift; sourceTree = "<group>"; };
 		26E7862F22BB3EAE00FBE73F /* gifts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gifts.swift; sourceTree = "<group>"; };
 		26E7863122BB40FE00FBE73F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		26E7863322BB452800FBE73F /* huawei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huawei.jpg; sourceTree = "<group>"; };
@@ -164,6 +170,15 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		267E735322C0800500AA3380 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				267E735422C0801500AA3380 /* loginpage.swift */,
+				267E735922C09A1800AA3380 /* loginStuct.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		26E7863F22BB4D8400FBE73F /* giftModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +248,7 @@
 		26EBF2C422BA83DE00CB7872 /* SHUunion */ = {
 			isa = PBXGroup;
 			children = (
+				267E735322C0800500AA3380 /* login */,
 				264765CC22BC917900D5454B /* ranksys */,
 				26E7865F22BB775E00FBE73F /* SHUunion.entitlements */,
 				26E7865822BB59ED00FBE73F /* supporting Views */,
@@ -281,6 +297,7 @@
 		26EBF2F522BA87DC00CB7872 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				267E735622C0838D00AA3380 /* logo.png */,
 				264765CF22BC924900D5454B /* rank.json */,
 				26E7865622BB592F00FBE73F /* 顾斌.jpg */,
 				26E7865422BB58AE00FBE73F /* info.json */,
@@ -405,6 +422,7 @@
 				26EBF2CF22BA83DE00CB7872 /* Preview Assets.xcassets in Resources */,
 				26E7865722BB592F00FBE73F /* 顾斌.jpg in Resources */,
 				26E7863722BB452800FBE73F /* xiaomi.jpg in Resources */,
+				267E735722C0838D00AA3380 /* logo.png in Resources */,
 				26E7864422BB4DF400FBE73F /* news.json in Resources */,
 				26EBF2CC22BA83DE00CB7872 /* Assets.xcassets in Resources */,
 				26E7865522BB58AE00FBE73F /* info.json in Resources */,
@@ -439,8 +457,10 @@
 				26E7865A22BB59FC00FBE73F /* CircleImage.swift in Sources */,
 				264765D222BC97F400D5454B /* rankItem.swift in Sources */,
 				26E7864822BB4FA300FBE73F /* Userdata.swift in Sources */,
+				267E735A22C09A1800AA3380 /* loginStuct.swift in Sources */,
 				26E7864622BB4F0900FBE73F /* news.swift in Sources */,
 				26E7864C22BB517800FBE73F /* newsDetail.swift in Sources */,
+				267E735522C0801500AA3380 /* loginpage.swift in Sources */,
 				26E7864A22BB512000FBE73F /* newsList.swift in Sources */,
 				26E7864F22BB57DA00FBE73F /* infoPage.swift in Sources */,
 				26E7863E22BB481600FBE73F /* giftDetail.swift in Sources */,

@@ -9,7 +9,10 @@
 import SwiftUI
 
 struct mainpage:View{
+    
     @EnvironmentObject var userdata:UserData
+    @State var firstAppear:Bool = true
+    
     var imgs2 = [
         "info",
         "news",
@@ -41,6 +44,25 @@ struct mainpage:View{
                 .tag(2)
         
         }
+    }
+    func firstInit(){
+        userdata.steps.firstInit()
+        userdata.search()
+    }
+
+}
+
+struct login:View {
+    @EnvironmentObject var userdata:UserData
+    var body: some View{
+        VStack{
+        if self.userdata.loginDatas.logined(){
+            mainpage()
+        }
+        else{
+            loginpage()
+    }
+    }
     }
 }
 

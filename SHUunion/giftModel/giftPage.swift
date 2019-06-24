@@ -53,8 +53,14 @@ struct giftPage : View {
                     Text("今日步数:\(userdata.today)"), displayMode: .large)
                 .background(Color.white)
                 .listStyle(.grouped)
+            
     
         }.edgesIgnoringSafeArea(.top)
+        .onAppear(perform: self.test)
+    }
+    
+    func test(){
+        print("open this view")
     }
 }
 
