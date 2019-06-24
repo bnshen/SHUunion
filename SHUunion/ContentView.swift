@@ -11,7 +11,7 @@ import SwiftUI
 struct mainpage:View{
     
     @EnvironmentObject var userdata:UserData
-    @State var firstAppear:Bool = true
+    
     
     var imgs2 = [
         "info",
@@ -43,12 +43,9 @@ struct mainpage:View{
                 .tabItemLabel(Text(self.texts[2]))
                 .tag(2)
         
-        }
+            }
     }
-    func firstInit(){
-        userdata.steps.firstInit()
-        userdata.search()
-    }
+
 
 }
 

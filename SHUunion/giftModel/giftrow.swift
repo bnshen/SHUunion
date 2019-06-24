@@ -21,7 +21,10 @@ struct giftrow : View {
             Text(verbatim: gifts.name).color(.primary).font(.title)
             Spacer()
             VStack(alignment: .trailing){
-        Text("\(self.userdata.giftsDatas[giftIndex].stepNow)/\(self.userdata.giftsDatas[giftIndex].stepNeed)步").color(.primary).font(.subheadline)
+       
+                HStack{ Text("\(self.userdata.giftsDatas[giftIndex].stepNow)/\(self.userdata.giftsDatas[giftIndex].stepNeed)步").color(.primary).font(.subheadline)
+                    SwiftUIDownloadView(progress:self.userdata.giftsDatas[giftIndex].progress(),action: {})
+                }
                 HStack{
                      Text("从\(gifts.year)年\(gifts.month)月\(gifts.day)日开始").font(.caption)
                     

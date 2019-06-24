@@ -10,6 +10,7 @@ import SwiftUI
 
 struct giftPage : View {
     @EnvironmentObject private var userdata:UserData
+    @State var firstAppear:Bool = false
     var body:some View{
         NavigationView
             {
@@ -56,11 +57,15 @@ struct giftPage : View {
             
     
         }.edgesIgnoringSafeArea(.top)
-        .onAppear(perform: self.test)
+        .onAppear(perform: self.firstInit)
     }
     
-    func test(){
-        print("open this view")
+    func firstInit(){
+        if self.firstAppear == false{
+            userdata.steps.firstInit()
+            userdata.search()
+            self.firstAppear = true
+        }
     }
 }
 

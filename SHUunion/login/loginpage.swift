@@ -41,7 +41,7 @@ struct loginpage : View {
                     .padding(.horizontal)
                 
                 
-                TextField(self.$password,placeholder: self.passwordHint)
+                SecureField(self.$password,placeholder: self.passwordHint)
                     .padding()
                     
                     .border(Color.gray, width: 3, cornerRadius: 100)

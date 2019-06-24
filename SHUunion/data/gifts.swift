@@ -23,7 +23,10 @@ struct gifts:Identifiable,Hashable,Decodable {
     var day:Int
     var stepNeed:Int
     var stepNow:Int
-
+    func progress()-> Float{
+        return Float(self.stepNow)/Float(self.stepNeed)
+        
+    }
 }
 
 struct giftsResponse: Decodable {
