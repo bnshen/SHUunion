@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		264765D222BC97F400D5454B /* rankItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264765D122BC97F400D5454B /* rankItem.swift */; };
 		264765D422BC9BFE00D5454B /* rankList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264765D322BC9BFE00D5454B /* rankList.swift */; };
 		264765D622BCA1FB00D5454B /* rankPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264765D522BCA1FB00D5454B /* rankPage.swift */; };
+		2647FB2822C3BC8D00A3472A /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 2647FB2722C3BC8D00A3472A /* data.db */; };
+		2647FB3322C3BCFC00A3472A /* sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647FB3222C3BCFC00A3472A /* sqlite.swift */; };
+		2647FB3622C3BF2B00A3472A /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2647FB3522C3BF2B00A3472A /* SQLite */; };
 		26567F8122BB387900C767A4 /* imageinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 26567F8022BB387900C767A4 /* imageinfo.json */; };
 		267E735522C0801500AA3380 /* loginpage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E735422C0801500AA3380 /* loginpage.swift */; };
 		267E735722C0838D00AA3380 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 267E735622C0838D00AA3380 /* logo.png */; };
@@ -78,6 +81,8 @@
 		264765D122BC97F400D5454B /* rankItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rankItem.swift; sourceTree = "<group>"; };
 		264765D322BC9BFE00D5454B /* rankList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rankList.swift; sourceTree = "<group>"; };
 		264765D522BCA1FB00D5454B /* rankPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rankPage.swift; sourceTree = "<group>"; };
+		2647FB2722C3BC8D00A3472A /* data.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.db; sourceTree = "<group>"; };
+		2647FB3222C3BCFC00A3472A /* sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqlite.swift; sourceTree = "<group>"; };
 		26567F8022BB387900C767A4 /* imageinfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = imageinfo.json; sourceTree = "<group>"; };
 		267E735422C0801500AA3380 /* loginpage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginpage.swift; sourceTree = "<group>"; };
 		267E735622C0838D00AA3380 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -129,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2647FB3622C3BF2B00A3472A /* SQLite in Frameworks */,
 				26E7866222BB775E00FBE73F /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +164,15 @@
 				264765D522BCA1FB00D5454B /* rankPage.swift */,
 			);
 			path = ranksys;
+			sourceTree = "<group>";
+		};
+		2647FB2622C3BC7800A3472A /* localStorage */ = {
+			isa = PBXGroup;
+			children = (
+				2647FB2722C3BC8D00A3472A /* data.db */,
+				2647FB3222C3BCFC00A3472A /* sqlite.swift */,
+			);
+			path = localStorage;
 			sourceTree = "<group>";
 		};
 		26567F8222BB398400C767A4 /* data */ = {
@@ -257,6 +272,7 @@
 		26EBF2C422BA83DE00CB7872 /* SHUunion */ = {
 			isa = PBXGroup;
 			children = (
+				2647FB2622C3BC7800A3472A /* localStorage */,
 				267E735322C0800500AA3380 /* login */,
 				264765CC22BC917900D5454B /* ranksys */,
 				26E7865F22BB775E00FBE73F /* SHUunion.entitlements */,
@@ -335,6 +351,9 @@
 			dependencies = (
 			);
 			name = SHUunion;
+			packageProductDependencies = (
+				2647FB3522C3BF2B00A3472A /* SQLite */,
+			);
 			productName = SHUunion;
 			productReference = 26EBF2C222BA83DE00CB7872 /* SHUunion.app */;
 			productType = "com.apple.product-type.application";
@@ -407,6 +426,9 @@
 				Base,
 			);
 			mainGroup = 26EBF2B922BA83DE00CB7872;
+			packageReferences = (
+				2647FB3422C3BF2B00A3472A /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
 			productRefGroup = 26EBF2C322BA83DE00CB7872 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -431,6 +453,7 @@
 				26EBF2CF22BA83DE00CB7872 /* Preview Assets.xcassets in Resources */,
 				26E7865722BB592F00FBE73F /* 顾斌.jpg in Resources */,
 				26E7863722BB452800FBE73F /* xiaomi.jpg in Resources */,
+				2647FB2822C3BC8D00A3472A /* data.db in Resources */,
 				267E735722C0838D00AA3380 /* logo.png in Resources */,
 				26E7864422BB4DF400FBE73F /* news.json in Resources */,
 				26EBF2CC22BA83DE00CB7872 /* Assets.xcassets in Resources */,
@@ -481,6 +504,7 @@
 				26E7863222BB40FE00FBE73F /* Data.swift in Sources */,
 				26EBF2C822BA83DE00CB7872 /* SceneDelegate.swift in Sources */,
 				26E7865C22BB5C4200FBE73F /* infobar.swift in Sources */,
+				2647FB3322C3BCFC00A3472A /* sqlite.swift in Sources */,
 				26E7863C22BB475000FBE73F /* giftPage.swift in Sources */,
 				264765D622BCA1FB00D5454B /* rankPage.swift in Sources */,
 				26EBF2CA22BA83DE00CB7872 /* ContentView.swift in Sources */,
@@ -812,6 +836,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2647FB3422C3BF2B00A3472A /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.12.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2647FB3522C3BF2B00A3472A /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2647FB3422C3BF2B00A3472A /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 26EBF2BA22BA83DE00CB7872 /* Project object */;
 }

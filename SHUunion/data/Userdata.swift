@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 import HealthKit
+import SQLite
 
 final class UserData: BindableObject {
     let didChange = PassthroughSubject<UserData, Never>()
@@ -177,6 +178,9 @@ final class UserData: BindableObject {
     }
    
     func login(username:String,password:String) {
+        
+        
+        
         let urlComponents = URLComponents(string: "http://192.168.1.3:8000/login")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
@@ -432,6 +436,7 @@ final class UserData: BindableObject {
         request.httpBody = postString.data(using: .utf8)
         
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("qweq", forHTTPHeaderField: "token")
         // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let decoder = JSONDecoder()
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -456,8 +461,8 @@ final class UserData: BindableObject {
         }
         task.resume()
     }
-    
-    
+    var locals = localS()
+
 
  
     

@@ -16,12 +16,13 @@ struct loginpage : View {
     var passwordHint = Text("一卡通密码")
     var body: some View {
         VStack {
-            Image("logo_transparent")
+            Image("appIcon")
                 .resizable()
-                .frame(width: 300, height: 300)
+                .frame(width: 200, height: 200)
                 //.clipShape(Circle())
                 .padding(.bottom)
-            
+                .padding(.top,30)
+            Text("上海大学工会").font(.title).padding(.bottom,50)
             //  Text("登陆")
             //  .font(.title)
             //  .bold()
