@@ -43,7 +43,7 @@ struct newsDetail : View {
                           message: Text("请耐心等待"),
                           primaryButton: .destructive(Text("确认")) {
                             print("转出中...")
-                            
+                            self.userData.post_tickets(id: self.userData.newsDatas[self.newsIndex].id)
                         },
                           secondaryButton: .cancel())
                 }).background(Color.orange)
@@ -54,17 +54,18 @@ struct newsDetail : View {
                 Button(action: {
                     self.showAlert = true
                 }) {
-                    Text("立即抢票")
+                    Text("已抢到票")
                         .font(.system(size: 20,
                                       design: .rounded)).fontWeight(.bold)
                         .color(Color.white)
                         .frame(width: UIScreen.main.bounds.width-30,
                                height: 45)
                     }.presentation($showAlert, alert: {
-                        Alert(title: Text("恭喜你"),
-                              message: Text("已抢到票"),
+                        Alert(title: Text("已抢到票"),
+                              message: Text("请勿重复抢票"),
                               primaryButton: .destructive(Text("确认")) {
                                 print("转出中...")
+
                                 
                             },
                               secondaryButton: .cancel())

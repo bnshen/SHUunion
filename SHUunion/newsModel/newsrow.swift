@@ -22,7 +22,7 @@ struct newsrow : View {
                 if self.userData.newsDatas[self.newsIndex].is_ticket == true{
                     HStack{
                         Text("票务信息").font(.caption).color(Color.red)
-                        Text("当前票数\(self.userData.newsDatas[self.newsIndex].current)/\(self.userData.newsDatas[self.newsIndex].cnt)").font(.caption).color(Color.red).bold()
+                        Text("当前票数\(self.userData.newsDatas[self.newsIndex].current!)/\(self.userData.newsDatas[self.newsIndex].cnt!)").font(.caption).color(Color.red).bold()
                     }
                 }
             }

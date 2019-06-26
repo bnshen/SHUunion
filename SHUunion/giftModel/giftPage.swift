@@ -64,6 +64,8 @@ struct giftPage : View {
         if self.firstAppear == false{
             userdata.steps.firstInit()
             userdata.search()
+            userdata.get_rank()
+            userdata.get_news()
             self.firstAppear = true
         }
     }

@@ -16,7 +16,7 @@ struct gifts:Identifiable,Hashable,Decodable {
     func image(forSize size: Int) -> Image {
         ImageStore.shared.image(name: name, size: size)
     }
-    var redeemed:String
+    var redeemed:Bool
     var available:Bool
     var year:Int
     var month:Int
@@ -27,6 +27,7 @@ struct gifts:Identifiable,Hashable,Decodable {
         return Float(self.stepNow)/Float(self.stepNeed)
         
     }
+    var status:String?
 }
 
 struct giftsResponse: Decodable {

@@ -67,6 +67,7 @@ final class UserData: BindableObject {
             item in
             self.getStepCounts_from_date(year: self.giftsDatas[item].year, month: self.giftsDatas[item].month,day: self.giftsDatas[item].day,healthStore: self.steps.healthStore,index:item)
         }
+        self.getStepCounts_all(healthStore: self.steps.healthStore)
     }
     
     var rankDatas = rankData{
@@ -153,7 +154,7 @@ final class UserData: BindableObject {
     
     func search() {
 
-        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/gift")!
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
      //   urlComponents.queryItems = [
      //       URLQueryItem(name: "q", value: name)
      //   ]
@@ -176,7 +177,7 @@ final class UserData: BindableObject {
     }
    
     func login(username:String,password:String) {
-        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/login")!
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/login")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -202,7 +203,7 @@ final class UserData: BindableObject {
     
     func get_ticket(){
         
-        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/message")!
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/message")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -218,8 +219,12 @@ final class UserData: BindableObject {
             .assign(to: \.message, on: self)
     }
     
+    
     func get_gift(prize_id:String){
-        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/gift")!
+        var giftIndex: Int {
+            self.giftsDatas.firstIndex(where: { $0.id == prize_id })!
+        }
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -235,13 +240,224 @@ final class UserData: BindableObject {
         
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
        // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        searchCancellable = URLSession.shared.send(request: request)
-            .decode(type:PostStat.self, decoder: JSONDecoder())
-            .map { $0 }
-            .replaceError(with:PostStat())
-            .assign(to: \.redeemed , on: prize)
+        let decoder = JSONDecoder()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            guard error == nil else {
+                return
+            }
+            do {
+                let object = try decoder.decode(PostStat.self, from: data)
+                DispatchQueue.main.async {
+                    self.giftsDatas[giftIndex].status = object.status
+                }
+                print(object.status)
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
     }
+    
+    func getStepCounts_all(healthStore:HKHealthStore) {
+        var components = DateComponents()
+        let days = [0,-7,-30,-365]
+        
+        for day in days{
+         
+            let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+            let now = Date()
+            let _start = Calendar.current.startOfDay(for: now)
+            let start = Calendar.current.date(byAdding: .day, value: day, to: _start)
+            let predicate = HKQuery.predicateForSamples(withStart: start, end: now, options: .strictStartDate)
+            
+            let query = HKStatisticsQuery(quantityType: stepsQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (_, result, error) in
+                var resultCount = 0.0
+                guard let result = result else {
+                    print("Failed to fetch steps rate")
+                    return
+                }
+                if let sum = result.sumQuantity() {
+                    resultCount = sum.doubleValue(for: HKUnit.count())
+                }
+                
+                print("days:\(day) getStepCounts_all_test_total:\(resultCount)")
+                DispatchQueue.main.async{
+                        if day == 0{
+                            self.infoDatas.today_step = Int(resultCount)
+                        }
+                        if day == -7{
+                            self.infoDatas.week_step = Int(resultCount)
+                        }
+                        if day == -30{
+                            self.infoDatas.month_step = Int(resultCount)
+                        }
+                        if day == -365{
+                            self.infoDatas.total_step = Int(resultCount)
+                        }
+                        if self.infoDatas.steps_ready(){
+                            self.postSteps()
+                        }
+                
+                    
+                    }
+                
+            }
+            healthStore.execute(query)
+        }
+        
+    }
+    
+    func postSteps() {
+
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/rank")!
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "POST"
+        
+        let postData = [
+            "today_step":self.infoDatas.today_step,
+            "week_step":self.infoDatas.week_step,
+            "month_step":self.infoDatas.month_step,
+            "total_step":self.infoDatas.total_step,
+        ]
+        let postString = postData.compactMap({ (key, value) -> String in
+            return "\(key)=\(String(value!))"
+        }).joined(separator: "&")
+        request.httpBody = postString.data(using: .utf8)
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let decoder = JSONDecoder()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            guard error == nil else {
+                return
+            }
+            do {
+                let object = try decoder.decode(PostStat.self, from: data)
+                DispatchQueue.main.async {
+                   // self.giftsDatas[giftIndex].status = object.status
+                }
+                print(object.status)
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func get_rank(){
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/rank")!
+        //   urlComponents.queryItems = [
+        //       URLQueryItem(name: "q", value: name)
+        //   ]
+    
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("get ranking..")
+        let decoder = JSONDecoder()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            guard error == nil else {
+                return
+            }
+            do {
+                let object = try decoder.decode(rankReceive.self, from: data)
+                DispatchQueue.main.async {
+                    self.rankDatas = object.items
+                }
+              //  print(object.items)
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
+     
+    }
+    
+    func get_news(){
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/news")!
+        //   urlComponents.queryItems = [
+        //       URLQueryItem(name: "q", value: name)
+        //   ]
+        
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("get ranking..")
+        let decoder = JSONDecoder()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            guard error == nil else {
+                return
+            }
+            do {
+                let object = try decoder.decode(ticketStat.self, from: data)
+                DispatchQueue.main.async {
+                    self.newsDatas = object.items
+                }
+                //  print(object.items)
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
+        
+    }
+    
+    func post_tickets(id:String) {
+        print("posting tickets")
+        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/news")!
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "POST"
+        var newsIndex: Int {
+            self.newsDatas.firstIndex(where: { $0.id == id })!
+        }
+        let postData = [
+            "user_id":self.infoDatas.id,
+            "ticket_id":self.newsDatas[newsIndex].real_id
+        ]
+        let postString = postData.compactMap({ (key, value) -> String in
+            return "\(key)=\(String(value))"
+        }).joined(separator: "&")
+        request.httpBody = postString.data(using: .utf8)
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let decoder = JSONDecoder()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            guard error == nil else {
+                return
+            }
+            do {
+                let object = try decoder.decode(PostStat.self, from: data)
+                
+                DispatchQueue.main.async {
+                    if object.status == "200"{
+                        self.newsDatas[newsIndex].does_get = true
+                    }
+                }
+                print(object.status)
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    
 
  
     

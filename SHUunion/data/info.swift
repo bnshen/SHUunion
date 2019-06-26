@@ -17,5 +17,13 @@ struct info:Hashable,Identifiable,Codable {
         ImageStore.shared.image(name: name, size: size)
     }
     var anyStep:Int
+    var today_step:Int?
+    var week_step:Int?
+    var month_step:Int?
+    var total_step:Int?
+    func steps_ready() -> Bool {
+        return (self.today_step != nil) && (self.week_step != nil) && (self.month_step != nil) && (self.total_step != nil)
+    }
+    
     
 }

@@ -17,17 +17,14 @@ struct news:Hashable,Identifiable,Codable {
     var author:String
     var date:String
     var is_ticket:Bool
-    var cnt:Int
-    var icon_path:String
-    var vedio_path:String
-    var does_get:Bool
-    var current:Int
+    var cnt:Int?
+    var icon_path:String?
+    var vedio_path:String?
+    var does_get:Bool?
+    var current:Int?
 }
 
 struct ticketStat:Decodable{
-    var status:String
-    init(){
-        self.status = ""
-    }
+    var items:[news]
 }
 

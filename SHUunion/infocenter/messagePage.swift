@@ -10,6 +10,8 @@ import SwiftUI
 
 struct messagePage : View {
     @EnvironmentObject var userdata:UserData
+    @State var appear:Bool=true
+
     var body: some View {
         NavigationView{
             List{
@@ -34,7 +36,10 @@ struct messagePage : View {
     }
     
     func update() {
-        self.userdata.get_ticket()
+        if self.appear{
+            self.userdata.get_ticket()
+            self.appear = false
+        }
     }
     
 }

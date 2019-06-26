@@ -63,7 +63,9 @@ struct giftDetail : View {
                           message: Text("兑换完成后请前往工会领取"),
                           primaryButton: .destructive(Text("确认")) {
                             self.userData.giftsDatas[self.giftIndex].redeemed = true
-                            print("转出中...") },
+                            print("转出中...")
+                            self.userData.get_gift(prize_id:self.userData.giftsDatas[self.giftIndex].id)
+                        },
                           secondaryButton: .cancel())
                 }).background(Color.orange)
                 .cornerRadius(10)

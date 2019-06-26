@@ -32,13 +32,6 @@ extension URLSession {
                     
                 }
                
-                do {
-                    let r = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                    print(r)
-                } catch {
-                    print("无法连接到服务器")
-                    return
-                }
                 
             }
             

@@ -22,3 +22,7 @@ struct Rank:Identifiable,Hashable,Decodable{
     var info:info
     var rankStatus:Int
 }
+
+struct rankReceive:Decodable {
+    var items:[Rank]
+}
