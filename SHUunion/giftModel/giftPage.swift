@@ -31,19 +31,19 @@ struct giftPage : View {
                 }
                 Section(header:Text("查看排名"),footer: Text("")){
                 NavigationButton(
-                    destination: rankPage(ranks: rankData.filter{
+                    destination: rankPage(ranks: self.userdata.rankDatas.filter{
                         $0.rankType.rawValue=="dayRank"
                     })) {
                     Text("每日排名")
                 }
                 NavigationButton(
-                    destination: rankPage(ranks: rankData.filter{
+                    destination: rankPage(ranks: self.userdata.rankDatas.filter{
                         $0.rankType.rawValue=="weekRank"
                     })) {
                         Text("每周排名")
                 }
                 NavigationButton(
-                    destination: rankPage(ranks: rankData.filter{
+                    destination: rankPage(ranks: self.userdata.rankDatas.filter{
                         $0.rankType.rawValue=="monthRank"
                     })) {
                         Text("每月排名")

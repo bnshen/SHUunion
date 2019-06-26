@@ -9,13 +9,20 @@
 import SwiftUI
 
 struct infoPage : View {
+
     var info:info
     var body: some View {
         NavigationView{
         VStack{
         infobar(info: info)
-        }.navigationBarTitle(Text("个人资料"), displayMode: .large)
             
+            List{
+                NavigationButton(destination: messagePage()){Text("问题咨询")}
+                
+                }.listStyle(.grouped)
+        }.navigationBarTitle(Text("个人资料"), displayMode: .large)
+        
+           
         }
 
         

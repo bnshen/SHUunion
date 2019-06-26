@@ -52,7 +52,12 @@ final class UserData: BindableObject {
             didChange.send(self)
         }
     }
-
+    var message = [question](){
+        didSet{
+            didChange.send(self)
+        }
+    }
+    
     func update() {
         if self.giftsDatas.count == 0{
             return
@@ -104,7 +109,7 @@ final class UserData: BindableObject {
         components.month = month
         components.timeZone = TimeZone(abbreviation: "CCT")
         let calendar = Calendar.current
-        var newDate1 = calendar.date(from: components)
+        let newDate1 = calendar.date(from: components)
         print("newdate:\(newDate1)")
         let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
         
@@ -148,7 +153,7 @@ final class UserData: BindableObject {
     
     func search() {
 
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
+        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/gift")!
      //   urlComponents.queryItems = [
      //       URLQueryItem(name: "q", value: name)
      //   ]
@@ -171,7 +176,7 @@ final class UserData: BindableObject {
     }
    
     func login(username:String,password:String) {
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/login")!
+        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/login")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -193,6 +198,49 @@ final class UserData: BindableObject {
             .map { $0 }
             .replaceError(with:loginStuctReceive())
             .assign(to: \.loginDatas.status , on: self)
+    }
+    
+    func get_ticket(){
+        
+        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/message")!
+        //   urlComponents.queryItems = [
+        //       URLQueryItem(name: "q", value: name)
+        //   ]
+        
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("searching..")
+        searchCancellable = URLSession.shared.send(request: request)
+            .decode(type:questionReceive.self, decoder: JSONDecoder())
+            .map { $0.items }
+            .replaceError(with: [])
+            .assign(to: \.message, on: self)
+    }
+    
+    func get_gift(prize_id:String){
+        let urlComponents = URLComponents(string: "http://192.168.0.100:8000/gift")!
+        //   urlComponents.queryItems = [
+        //       URLQueryItem(name: "q", value: name)
+        //   ]
+        
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "POST"
+        
+        let postData = ["user_id":self.infoDatas.id,"prize_id":prize_id]
+        let postString = postData.compactMap({ (key, value) -> String in
+            return "\(key)=\(value)"
+        }).joined(separator: "&")
+        request.httpBody = postString.data(using: .utf8)
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+       // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        searchCancellable = URLSession.shared.send(request: request)
+            .decode(type:PostStat.self, decoder: JSONDecoder())
+            .map { $0 }
+            .replaceError(with:PostStat())
+            .assign(to: \.redeemed , on: prize)
     }
 
  

@@ -26,7 +26,7 @@ struct infobar : View {
                     
                 }
             }
-            Spacer()
+            
             
         }.padding()
     }

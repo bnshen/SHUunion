@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct newsList : View {
-    
+  
     var news:[news]
     var body: some View {
         NavigationView{

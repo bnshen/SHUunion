@@ -33,3 +33,10 @@ struct loginStuctReceive:Decodable{
         self.status = ""
     }
 }
+
+struct PostStat:Decodable{
+    var status:String
+    init(){
+        self.status = ""
+    }
+}
