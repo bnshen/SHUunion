@@ -155,7 +155,7 @@ final class UserData: BindableObject {
     
     func search() {
 
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/gift")!
      //   urlComponents.queryItems = [
      //       URLQueryItem(name: "q", value: name)
      //   ]
@@ -181,7 +181,7 @@ final class UserData: BindableObject {
         
         
         
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/login")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/login")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -207,7 +207,7 @@ final class UserData: BindableObject {
     
     func get_ticket(){
         
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/message")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/message")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -228,7 +228,7 @@ final class UserData: BindableObject {
         var giftIndex: Int {
             self.giftsDatas.firstIndex(where: { $0.id == prize_id })!
         }
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/gift")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/gift")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -316,7 +316,7 @@ final class UserData: BindableObject {
     
     func postSteps() {
 
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/rank")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/rank")!
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "POST"
         
@@ -355,7 +355,7 @@ final class UserData: BindableObject {
     }
     
     func get_rank(){
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/rank")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/rank")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -387,7 +387,7 @@ final class UserData: BindableObject {
     }
     
     func get_news(){
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/news")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/news")!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -420,7 +420,7 @@ final class UserData: BindableObject {
     
     func post_tickets(id:String) {
         print("posting tickets")
-        let urlComponents = URLComponents(string: "http://192.168.1.3:8000/news")!
+        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/news")!
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "POST"
         var newsIndex: Int {
