@@ -10,7 +10,7 @@ import SwiftUI
 
 struct giftDetail : View {
     @EnvironmentObject var userData: UserData
-    var gift:gifts
+    @State var gift:gifts
     var giftIndex: Int {
        userData.giftsDatas.firstIndex(where: { $0.id == gift.id })!
     }
@@ -19,7 +19,13 @@ struct giftDetail : View {
     var body: some View {
         VStack{
             Text(gift.name).font(.title)
-            gift.image(forSize: 250)
+            //gift.image(forSize: 250)
+            self.userData.giftImages[self.userData.giftsDatas[self.giftIndex]].map { giftimg in
+                Image(uiImage: giftimg)
+                    .resizable()
+                    .frame(width: 250, height: 250)
+                    .aspectRatio(contentMode: .fit)
+            }
             List{
             
                 Section(header:Text("简介")){

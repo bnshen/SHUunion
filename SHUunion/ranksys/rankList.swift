@@ -18,7 +18,7 @@ struct rankList : View {
                     rankItem(rank: rank)
                 }
             }
-    .navigationBarTitle(Text("\(ranks[0].rankType.rawValue)"),displayMode: .large)
+    .navigationBarTitle(Text("\(ranks[0].rankDisplay())"),displayMode: .large)
         }
         
     }

@@ -14,13 +14,19 @@ struct giftPage : View {
     var body:some View{
         NavigationView
             {
+                VStack{
+                    HStack{
+                        Text("今日步数:\(userdata.today)").bold()
+                        Spacer()
+                    }.padding(.leading,20)
             List{
-                
+                 Section(header:Text("更新数据")){
                 Button(
                     action: userdata.update,
                     label: { Text("更新数据")}
                     )
-                Section(header:Text("兑换礼品"),footer: Text("")){
+                }
+                Section(header:Text("兑换礼品")){
                 ForEach(userdata.giftsDatas){
                     gift in
                     NavigationButton(
@@ -29,35 +35,48 @@ struct giftPage : View {
                     }
                 }
                 }
-                Section(header:Text("查看排名"),footer: Text("")){
-                NavigationButton(
-                    destination: rankPage(ranks: self.userdata.rankDatas.filter{
-                        $0.rankType.rawValue=="dayRank"
-                    })) {
-                    Text("每日排名")
-                }
-                NavigationButton(
-                    destination: rankPage(ranks: self.userdata.rankDatas.filter{
-                        $0.rankType.rawValue=="weekRank"
-                    })) {
-                        Text("每周排名")
-                }
-                NavigationButton(
-                    destination: rankPage(ranks: self.userdata.rankDatas.filter{
-                        $0.rankType.rawValue=="monthRank"
-                    })) {
-                        Text("每月排名")
+                 Section(header:Text("查看排名")){
+                NavigationButton(destination: self.rankP){
+                Image(systemName: "list.number")
+                    Text("查看排名")
                 }
                 }
+               
+                    }
 
             }.navigationBarTitle(
-                    Text("今日步数:\(userdata.today)"), displayMode: .large)
+                    Text("欢迎来到上海大学工会"), displayMode:.automatic)
                 .background(Color.white)
-                .listStyle(.grouped)
+            
+                
+                
             
     
-        }.edgesIgnoringSafeArea(.top)
+        }
         .onAppear(perform: self.firstInit)
+    }
+    
+    var rankP:some View{
+        List{
+            NavigationButton(
+                destination: rankPage(ranks: self.userdata.rankDatas.filter{
+                    $0.rankType.rawValue=="dayRank"
+                })) {
+                    Text("每日排名")
+            }
+            NavigationButton(
+                destination: rankPage(ranks: self.userdata.rankDatas.filter{
+                    $0.rankType.rawValue=="weekRank"
+                })) {
+                    Text("每周排名")
+            }
+            NavigationButton(
+                destination: rankPage(ranks: self.userdata.rankDatas.filter{
+                    $0.rankType.rawValue=="monthRank"
+                })) {
+                    Text("每月排名")
+            }
+        }.listStyle(.grouped)
     }
     
     func firstInit(){
@@ -71,13 +90,13 @@ struct giftPage : View {
     }
 }
 
-/*
+
 
 #if DEBUG
 struct giftPage_Previews : PreviewProvider {
     static var previews: some View {
-     //   giftPage(gifts:giftsData)
+        giftPage().environmentObject(UserData())
     }
 }
 #endif
- */
+

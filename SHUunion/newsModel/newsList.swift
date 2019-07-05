@@ -21,7 +21,7 @@ struct newsList : View {
                 }
             }.navigationBarTitle(Text("最新资讯"), displayMode: .large)
                 .background(Color.white)
-                .listStyle(.grouped)
+            
         }
     }
 }

@@ -17,6 +17,20 @@ struct Rank:Identifiable,Hashable,Decodable{
         case monthRank = "monthRank"
         case seasonRank = "seasonRank"
     }
+    func rankDisplay() -> String{
+        switch self.rankType.rawValue {
+        case "dayRank":
+            return "每日排行"
+        case "weekRank":
+            return "每周排行"
+        case "monthRank":
+            return "每月排行"
+        case "seasonRank":
+            return "每季排行"
+        default:
+            return ""
+        }
+    }
  
     //var rankType:String
     var info:info

@@ -17,7 +17,12 @@ struct infoPage : View {
         infobar(info: info)
             
             List{
-                NavigationButton(destination: messagePage()){Text("问题咨询")}
+                NavigationButton(destination: askQuestion()){
+                    Image(systemName: "questionmark.square.fill")
+                    Text("我要提问")}
+                NavigationButton(destination: messagePage()){
+                    Image(systemName: "list.dash")
+                    Text("提问记录")}
                 
                 }.listStyle(.grouped)
         }.navigationBarTitle(Text("个人资料"), displayMode: .large)

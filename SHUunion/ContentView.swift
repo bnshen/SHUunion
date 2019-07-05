@@ -67,7 +67,7 @@ struct login:View {
 
 
 
-/*
+
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
@@ -76,4 +76,4 @@ struct ContentView_Previews : PreviewProvider {
     }
 }
 #endif
- */
+

@@ -17,7 +17,16 @@ struct giftrow : View {
     var body: some View {
         
         HStack {
-            gifts.image(forSize: 50).renderingMode(.original)
+            //gifts.image(forSize: 70).renderingMode(.original)
+           // Image(uiImage: self.userdata.giftImages[self.gifts])
+            userdata.giftImages[gifts].map { giftimg in
+                Image(uiImage: giftimg)
+                    .resizable()
+                    .frame(width: 44, height: 44)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.black, lineWidth: 1))
+            }
             Text(verbatim: gifts.name).color(.primary).font(.title)
             Spacer()
             VStack(alignment: .trailing){
@@ -38,7 +47,8 @@ struct giftrow : View {
                    
                 }
             }
-            }
+            }.onAppear{
+                self.userdata.get_giftImages(for: self.gifts)}
         }
     }
 

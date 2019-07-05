@@ -58,6 +58,8 @@ final class UserData: BindableObject {
             didChange.send(self)
         }
     }
+    let baseUrl = URL(string:"http://127.0.0.1:8000")!
+
     
     func update() {
         if self.giftsDatas.count == 0{
@@ -155,7 +157,9 @@ final class UserData: BindableObject {
     
     func search() {
 
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/gift")!
+        let endUrl = "gift"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
      //   urlComponents.queryItems = [
      //       URLQueryItem(name: "q", value: name)
      //   ]
@@ -180,8 +184,9 @@ final class UserData: BindableObject {
     func login(username:String,password:String) {
         
         
-        
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/login")!
+        let endUrl = "login"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -207,7 +212,9 @@ final class UserData: BindableObject {
     
     func get_ticket(){
         
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/message")!
+        let endUrl = "message"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -228,7 +235,9 @@ final class UserData: BindableObject {
         var giftIndex: Int {
             self.giftsDatas.firstIndex(where: { $0.id == prize_id })!
         }
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/gift")!
+        let endUrl = "gift"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -316,7 +325,9 @@ final class UserData: BindableObject {
     
     func postSteps() {
 
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/rank")!
+        let endUrl = "rank"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "POST"
         
@@ -355,7 +366,9 @@ final class UserData: BindableObject {
     }
     
     func get_rank(){
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/rank")!
+        let endUrl = "rank"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -387,7 +400,9 @@ final class UserData: BindableObject {
     }
     
     func get_news(){
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/news")!
+        let endUrl = "news"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         //   urlComponents.queryItems = [
         //       URLQueryItem(name: "q", value: name)
         //   ]
@@ -420,7 +435,9 @@ final class UserData: BindableObject {
     
     func post_tickets(id:String) {
         print("posting tickets")
-        let urlComponents = URLComponents(string: "https://lz-legal-aid.cn:8000/news")!
+        let endUrl = "news"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "POST"
         var newsIndex: Int {
@@ -463,7 +480,64 @@ final class UserData: BindableObject {
     }
     var locals = localS()
 
-
- 
+    func postMessage(id:String,content:String){
+        let endUrl = "message"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "POST"
+        
+        let postData = [
+            "user_id":id,
+            "type":"",
+            "content":content
+        ]
+        let postString = postData.compactMap({ (key, value) -> String in
+            return "\(key)=\(String(value))"
+        }).joined(separator: "&")
+        request.httpBody = postString.data(using: .utf8)
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let decoder = JSONDecoder()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            guard error == nil else {
+                return
+            }
+            do {
+                let object = try decoder.decode(PostStat.self, from: data)
+                DispatchQueue.main.async {
+                    // self.giftsDatas[giftIndex].status = object.status
+                }
+                print(object.status)
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    private(set) var giftImages = [gifts: UIImage]() {
+        didSet { didChange.send(self) }
+    }
+    
+    func get_giftImages(for gift: gifts){
+        guard case .none = self.giftImages[gift] else {
+            return
+        }
+        let endUrl = "download/\(gift.img_url!)"
+        let queryURL = self.baseUrl.appendingPathComponent(endUrl)
+        var urlComponents = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
+        print(urlComponents)
+        let request = URLRequest(url: urlComponents.url!)
+        _ = URLSession.shared.send(request: request)
+            .map { UIImage(data: $0) }
+            .replaceError(with: nil)
+            .sink(receiveValue: { [weak self] image in
+                self?.giftImages[gift] = image
+            })
+    }
     
 }

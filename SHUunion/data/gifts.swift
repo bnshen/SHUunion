@@ -28,6 +28,8 @@ struct gifts:Identifiable,Hashable,Decodable {
         
     }
     var status:String?
+    var img_url:String?
+    
 }
 
 struct giftsResponse: Decodable {

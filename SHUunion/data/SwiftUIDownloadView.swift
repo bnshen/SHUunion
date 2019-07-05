@@ -27,8 +27,8 @@ struct SwiftUIDownloadView : View {
                             ProgressButtonCircle(startAngleRadians: circle.progressStartAngleRadians,
                                                  endAngleRadians: circle.progressEndAngleRadians)
                                 .fill(Color.Blue.medium)
-                            ProgressBurronSquare()
-                            .fill(Color.Blue.medium)
+                            /*ProgressBurronSquare()
+                            .fill(Color.Blue.medium)*/
                         }
                     }
                 }
@@ -134,7 +134,7 @@ class AnimationCircle: BindableObject {
     init() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) {[weak self] _ in
             withAnimation {
-                self?.currentAngle += 1
+                //self?.currentAngle += 1
             }
         }
     }
