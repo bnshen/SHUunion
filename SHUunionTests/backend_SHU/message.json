@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "id": "1",
+            "send_id": "1",
+            "receive_id": "2",
+            "context": "怎么才能领奖？",
+            "send_time": "2019-6-10",
+            "type": ""
+        },
+        {
+            "id": "2",
+            "send_id": "2",
+            "receive_id": "1",
+            "context": "你说呢",
+            "send_time": "2019-6-10",
+            "type": ""
+        },
+        {
+            "id": "3",
+            "send_id": "1",
+            "receive_id": "2",
+            "context": "到底怎么才能领奖？啊啊啊啊啊啊\n啊啊啊啊\n啊啊啊\n",
+            "send_time": "2019-6-10",
+            "type": ""
+        }
+    ]
+}

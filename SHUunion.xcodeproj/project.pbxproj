@@ -55,6 +55,7 @@
 		26EBF2D222BA83DE00CB7872 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26EBF2D022BA83DE00CB7872 /* LaunchScreen.storyboard */; };
 		26EBF2DD22BA83DE00CB7872 /* SHUunionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EBF2DC22BA83DE00CB7872 /* SHUunionTests.swift */; };
 		26EBF2E822BA83DE00CB7872 /* SHUunionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EBF2E722BA83DE00CB7872 /* SHUunionUITests.swift */; };
+		26F518CB22D0F6D300D05BA8 /* backend_SHU in Resources */ = {isa = PBXBuildFile; fileRef = 26F518CA22D0F6D300D05BA8 /* backend_SHU */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		26EBF2E322BA83DE00CB7872 /* SHUunionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SHUunionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EBF2E722BA83DE00CB7872 /* SHUunionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHUunionUITests.swift; sourceTree = "<group>"; };
 		26EBF2E922BA83DE00CB7872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26F518CA22D0F6D300D05BA8 /* backend_SHU */ = {isa = PBXFileReference; lastKnownFileType = folder; path = backend_SHU; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +309,7 @@
 		26EBF2DB22BA83DE00CB7872 /* SHUunionTests */ = {
 			isa = PBXGroup;
 			children = (
+				26F518CA22D0F6D300D05BA8 /* backend_SHU */,
 				26EBF2DC22BA83DE00CB7872 /* SHUunionTests.swift */,
 				26EBF2DE22BA83DE00CB7872 /* Info.plist */,
 			);
@@ -468,6 +471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F518CB22D0F6D300D05BA8 /* backend_SHU in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
